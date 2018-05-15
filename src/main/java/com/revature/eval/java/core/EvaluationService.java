@@ -255,6 +255,11 @@ public class EvaluationService {
 	public String cleanPhoneNumber(String string) {
 		// TODO Write an implementation for this method declaration
 		String value = string.replaceAll("[^0-9]","");
+		if (value.length() > 10 && value.charAt(0) == '1'){
+			value = value.substring(1);	
+		} else if ( value.length() < 10 ) {
+			return "Invalid Number!";
+		}
 		return value;
 	}
 

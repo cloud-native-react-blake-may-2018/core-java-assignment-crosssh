@@ -9,7 +9,7 @@ public class Test {
 		System.out.println(triangle.isIsosceles());
 		System.out.println(triangle.isScalene());
 		
-		System.out.println(evaluationService.cleanPhoneNumber("(223) 456-7890"));
+		System.out.println(evaluationService.cleanPhoneNumber("123-abc-7890"));
 
 	}
 }
