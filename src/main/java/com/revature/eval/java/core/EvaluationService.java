@@ -31,7 +31,13 @@ public class EvaluationService {
 	 */
 	public String acronym(String phrase) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		
+		//String[] items = phrase.split("\\s+");
+		String acr = "";
+		for ( String word : phrase.split("\\s+") )
+			acr += word.charAt(0);
+		
+		return acr;
 	}
 
 	/**
@@ -84,16 +90,22 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
+			if( this.getSideOne() == this.getSideTwo() && this.getSideTwo() == this.getSideThree())
+				return true;
 			// TODO Write an implementation for this method declaration
 			return false;
 		}
 
 		public boolean isIsosceles() {
+			if( this.getSideOne() == this.getSideTwo() || this.getSideOne() == this.getSideThree() || this.getSideTwo() == this.getSideThree())
+				return true;
 			// TODO Write an implementation for this method declaration
 			return false;
 		}
 
 		public boolean isScalene() {
+			if( !this.isEquilateral() && !this.isIsosceles())
+				return true;
 			// TODO Write an implementation for this method declaration
 			return false;
 		}
@@ -117,7 +129,96 @@ public class EvaluationService {
 	 */
 	public int getScrabbleScore(String string) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		int len = string.length();
+		int score = 0;
+		char[] chars = string.toCharArray();
+		for (int i = 0; i < len; i++ ) {
+			switch (Character.toUpperCase(chars[i])) {
+			case 'A': 
+				score += 1;
+				break;
+			case 'B':
+				score += 3;		
+				break;
+			case 'C':
+				score += 3;
+				break;
+			case 'D':
+				score += 2;
+				break;
+			case 'E':
+				score += 1;
+				break;
+			case 'F':
+				score += 4;
+				break;
+			case 'G':
+				score += 2;
+				break;
+			case 'H':
+				score += 4;
+				break;
+			case 'I':
+				score += 1;
+				break;
+			case 'J':
+				score += 8;
+				break;
+			case 'K':
+				score += 5;
+				break;
+			case 'L':
+				score += 1;
+				break;
+			case 'M':
+				score += 3;
+				break;
+			case 'N':
+				score += 1;
+				break;
+			case 'O':
+				score += 1;
+				break;
+			case 'P':
+				score += 3;
+				break;
+			case 'Q':
+				score += 10;
+				break;
+			case 'R':
+				score += 1;
+				break;
+			case 'S':
+				score += 1;
+				break;
+			case 'T':
+				score += 1;
+				break;
+			case 'U':
+				score += 1;
+				break;
+			case 'V':
+				score += 4;
+				break;
+			case 'W':
+				score += 4;
+				break;
+			case 'X':
+				score += 8;
+				break;
+			case 'Y':
+				score += 4;
+				break;
+			case 'Z':
+				score += 10;
+				break;
+			
+	
+			default:
+				break;
+			}
+		}
+		return score;
 	}
 
 	/**
