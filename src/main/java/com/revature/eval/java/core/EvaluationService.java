@@ -5,6 +5,7 @@ import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -288,7 +289,7 @@ public class EvaluationService {
 		// TODO Write an implementation for this method declaration
 		Map<String, Integer> map = new HashMap<String, Integer>();
 
-		String[] words = string.split(",*\\r?\\n|\\s+");
+		String[] words = string.split(",*\\r?\\n|\\s+|,");
 		for (int i = 0; i < words.length; i++) {
 			System.out.println(words[i]);
 			if (map.containsKey(words[i])) {
@@ -341,7 +342,39 @@ public class EvaluationService {
 
 		public int indexOf(T t) {
 			// TODO Write an implementation for this method declaration
-			return 0;
+
+			List<T> myList = new ArrayList<>();
+			myList = getSortedList();
+			int mid = myList.size() / 2;
+			int test = 0;
+			int index = mid;
+			boolean found = false;
+
+			if(t instanceof String) {			
+				test = Integer.parseInt((String) t) - Integer.parseInt((String) myList.get(mid));
+			}
+			
+			while (!found) {
+				if (myList.size() > 2) {
+					if(t instanceof String) {			
+						test = Integer.parseInt((String) t) - Integer.parseInt((String) myList.get(mid));
+					} else
+						test = (int) myList.get(mid)+1;
+				}
+				if (myList.get(mid).equals(t)) {
+					found = true;
+				} else if ((int) t >= test) {
+					myList = myList.subList(mid, myList.size());
+					mid = myList.size() / 2;
+					index += mid;
+				} else {
+					myList = myList.subList(0, mid);
+					mid = myList.size() / 2;
+					index = mid;
+				}
+			}
+
+			return index;
 		}
 
 		public BinarySearch(List<T> sortedList) {
@@ -654,8 +687,6 @@ public class EvaluationService {
 				decodedString += getVal(word.charAt(i));
 			}
 
-			System.out.println(decodedString);
-
 			return decodedString;
 		}
 
@@ -748,14 +779,10 @@ public class EvaluationService {
 		for (int i = 0; i < words.length; i++) {
 			word += words[i];
 		}
-		System.out.println(word.length());
 
 		for (int i = 0; i < word.length(); i++) {
 			map.put(word.charAt(i), 1);
 		}
-
-		System.out.println(word.length());
-		System.out.println(map.size());
 
 		if (map.size() != 26)
 			return false;
@@ -784,7 +811,7 @@ public class EvaluationService {
 			month = given.get(ChronoField.MONTH_OF_YEAR);
 			day = given.get(ChronoField.DAY_OF_MONTH);
 		}
-		
+
 		return LocalDateTime.of(year, month, day, 0, 0, 0).plus(gigaSecond, ChronoUnit.SECONDS);
 	}
 
@@ -817,7 +844,6 @@ public class EvaluationService {
 		for (int x : list)
 			total += x;
 
-		System.out.println(total);
 		return total;
 	}
 
@@ -870,7 +896,7 @@ public class EvaluationService {
 
 		StringBuilder sb = new StringBuilder(word);
 		StringBuilder sb2 = new StringBuilder();
-
+		
 		System.out.println(sb.reverse());
 		for (int i = 0; i < sb.length(); i++) {
 
@@ -887,14 +913,11 @@ public class EvaluationService {
 			}
 
 		}
-		System.out.println();
-		System.out.println(sb2.reverse());
 
 		for (int i = 0; i < sb2.length(); i++) {
 			total += Character.getNumericValue(sb2.charAt(i));
 		}
-
-		System.out.println(total);
+		
 		if (total % 10 == 0)
 			return true;
 
@@ -931,7 +954,7 @@ public class EvaluationService {
 	public int solveWordProblem(String string) {
 		// TODO Write an implementation for this method declaration
 		String[] words = string.split("\\s+|\\?");
-		System.out.println(words[3]);
+		
 		switch (words[3]) {
 		case "plus":
 			return Integer.valueOf(words[2]) + Integer.valueOf(words[4]);

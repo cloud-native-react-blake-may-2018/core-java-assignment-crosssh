@@ -2,6 +2,9 @@ package com.revature.eval.java.core;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
@@ -14,21 +17,29 @@ public class Test {
 		
 		System.out.println(evaluationService.acronym("Complementary metal-oxide semiconductor"));
 		System.out.println(evaluationService.cleanPhoneNumber("3524567897"));
-		System.out.println((evaluationService.wordCount("one,\ntwo,\nthree")));
+		System.out.println((evaluationService.wordCount("one,two,three")));
 		System.out.println(evaluationService.toPigLatin("quick fast run"));
-		System.out.println(evaluationService.isArmstrongNumber(9474));
-		System.out.println(evaluationService.calculatePrimeFactorsOf(9L));
-		EvaluationService.RotationalCipher rc = new EvaluationService.RotationalCipher(13);
-		rc.rotate("The quick brown fox jumps over the lazy dog.");
-		System.out.println(evaluationService.calculateNthPrime(1));
-		EvaluationService.AtbashCipher.encode("Testing,1 2 3, testing.");
-		EvaluationService.AtbashCipher.decode("gvhgr mt123 gvhgr mt");
-		evaluationService.isValidIsbn("3-598-21508-8");
-		System.out.println( evaluationService.isPangram("a quick movement of the enemy will jeopardize five gunboats") );
-		evaluationService.getGigasecondDate(LocalDate.of(1977, Month.JUNE, 13));
-		evaluationService.solveWordProblem("What is -3 multiplied by 25?");
-		evaluationService.isLuhnValid("4539 1488 0343 6467");
-		int[] set = { 5, 6, 8 };
-		evaluationService.getSumOfMultiples(150, set);
+		
+		System.out.println();
+		List<String> sortedList = Collections.unmodifiableList(Arrays.asList("1", "3", "4", "6", "8", "9", "11"));
+
+		EvaluationService.BinarySearch<String> search = new EvaluationService.BinarySearch<>(sortedList);
+		search.indexOf("6");
+		System.out.println();
+//		
+//		System.out.println(evaluationService.isArmstrongNumber(9474));
+//		System.out.println(evaluationService.calculatePrimeFactorsOf(9L));
+//		EvaluationService.RotationalCipher rc = new EvaluationService.RotationalCipher(13);
+//		rc.rotate("The quick brown fox jumps over the lazy dog.");
+//		System.out.println(evaluationService.calculateNthPrime(1));
+//		EvaluationService.AtbashCipher.encode("Testing,1 2 3, testing.");
+//		EvaluationService.AtbashCipher.decode("gvhgr mt123 gvhgr mt");
+//		evaluationService.isValidIsbn("3-598-21508-8");
+//		System.out.println( evaluationService.isPangram("a quick movement of the enemy will jeopardize five gunboats") );
+//		evaluationService.getGigasecondDate(LocalDate.of(1977, Month.JUNE, 13));
+//		evaluationService.solveWordProblem("What is -3 multiplied by 25?");
+//		evaluationService.isLuhnValid("4539 1488 0343 6467");
+//		int[] set = { 5, 6, 8 };
+//		evaluationService.getSumOfMultiples(150, set);
 	}
 }
